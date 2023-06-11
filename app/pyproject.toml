@@ -1,0 +1,101 @@
+[tool.poetry]
+name = "university_task"
+version = "0.0.1"
+description = ""
+authors = ["Kirill Che <kiriciri@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.96.1"
+uvicorn = "^0.22.0"
+sqlalchemy = "^2.0.16"
+psycopg2-binary = "^2.9.6"
+pydantic = {extras = ["dotenv"], version = "^1.10.9"}
+
+#python-dateutil = "^2.8.2"
+
+[tool.poetry.group.dev.dependencies]
+#alembic = "^1.9.2"
+#pytest = "^7.2.1"
+#pytest-env = "^0.8.1"
+pre-commit = "^3.3.2"
+
+[tool.isort]
+#https://pycqa.github.io/isort/index.html
+profile = "pycharm" # "black"
+
+known_first_party = []
+known_local_folder = ['apis', 'db', 'core', 'schemas']
+
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+extend_skip = ["alembic"]
+
+line_length = 120
+case_sensitive = true
+lines_after_imports = -1
+
+#lines_between_types = 1
+#lines_between_sections = 1
+#group_by_package = true
+#no_lines_before = []
+include_trailing_comma = true          # def: PC=false, BL=true
+ensure_newline_before_comments = false # def: PC=true, BL=false
+#multi_line_output = 5
+force_grid_wrap = 0 # def: PC=2, BL=0
+
+[tool.black]
+line-length = 120
+skip-string-normalization = true
+
+[tool.ruff]
+
+fixable = ["Q", "UP", "SIM", "PT", "ANN", "RET", "PLR"]
+ignore = [
+    "D",
+    "T201",
+    "E501",
+    "I001",   # 	unsorted-imports
+    "RUF001", #ambiguous-unicode-character-*
+    "RUF002",
+    "RUF003",
+    "TCH002",
+    "TCH003",
+    "ANN101", # missing-type-self
+    "ANN102", # missing-type-self
+    "ERA001", # commented-out-code
+    "S105",
+    "COM812",
+]
+exclude = ["alembic"]
+line-length = 120
+
+[tool.ruff.per-file-ignores]
+"app/db/base.py" = ["F401"]
+"*test_*.py" = ["S101"]
+
+[tool.ruff.flake8-quotes]
+inline-quotes = "single"
+
+[tool.ruff.flake8-type-checking]
+strict = true
+
+[tool.ruff.flake8-builtins]
+builtins-ignorelist = ["id", "__name__"]
+
+[tool.ruff.flake8-bugbear]
+extend-immutable-calls = ["fastapi.Depends", "fastapi.Query", "fastapi.Header"]
+
+[tool.ruff.pep8-naming]
+classmethod-decorators = [
+    "classmethod",
+    "pydantic.validator",
+    "sqlalchemy.orm.declared_attr",
+]
+
+[tool.ruff.flake8-pytest-style]
+fixture-parentheses = false
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

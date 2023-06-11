@@ -1,0 +1,20 @@
+# local staging compose
+version: "3.8"
+name: "university"
+services:
+  api:
+    build:
+      context: ./app
+      dockerfile: ./Dockerfile
+#    command: ['python', 'main.py']
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+#      - "uvicorn"
+#      - "main_basic:app"
+#      - "--host"
+#      - "0.0.0.0"
+#      - "--port"
+#      - "8000"
+    ports:
+      - "80:8000"
+    volumes:
+      - ./app:/app
