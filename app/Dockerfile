@@ -10,7 +10,4 @@ RUN poetry install --no-interaction --no-ansi --no-root --no-dev
 
 COPY . /app
 
-#CMD [ "python", "main.py"]
-#CMD ["uvicorn", "app.main_basic:app", "--host", "0.0.0.0", "--port", "80"]
-#RUN chmod +x /app/docker-entrypoint.sh
-#ENTRYPOINT ["/app/docker-entrypoint.sh"]
+CMD ["uvicorn", "app.main_basic:app", "--host", "0.0.0.0", "--port", "80", "--reload"]

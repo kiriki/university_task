@@ -1,18 +1,34 @@
-# Students
+# University test API (тестовое задание)
+Вариант решения для [тестового задания](https://docs.google.com/document/d/e/2PACX-1vSX30SoSm5VOW_yPYJURcdvQvmNUzsggcmazKvczRz9puaaeXapH1ZzKdctldXeXcAXH3sp4aJxh3dC/pub).
 
-include .env file:
+## 1. Разработка структуры БД
+Вариант схемы базы представлен в `sql/101_db_schema.sql`.  
+> Примечание:
+>
+> Полноценное проектирование структуры БД предполагает наличие бизнес-требований, зафиксированных в спецификации 
+> требований, функциональной спецификации или хотя бы неформального описания семантической модели предметной области.
+> Ничего из этого в предложенном задании, к сожалению, не предоставлено. При этом далеко не все перечисленные сущности,
+> для которых предлагается определить отношения, имеют интуитивное значение, что делает невозможным сколько-нибудь
+> точное моделирование предметной области.
 
-```
-PROJECT_NAME=...
-PROJECT_VERSION=0.0.1
-BACKEND_CORS_ORIGINS=["http://localhost:8000", "https://localhost:8000", "http://localhost", "https://localhost"]
+Диаграмма связей:
+![ERChart.png](/graph%2FERChart.png)
 
-POSTGRES_USER=user2
-POSTGRES_PASSWORD=1
-POSTGRES_SERVER=localhost
-POSTGRES_DB=stud_db
-```
+## 2. Запросы
+* Требуемые SQL-запросы представлены в `sql/02_queries.sql`.
 
-## License
+## 3. University test API
+Реализованы точки входа и модели Pydantic:
+* `app/api/route/` -  маршруты
+* `app/schemas/` - модели Pydantic
 
-This project is licensed under the terms of the MIT license.
+Дополнительно добавлено соединение с базой данных PostgreSQL и модели SQLAlchemy.
+
+* Для запуска склонировать репозиторий. Далее собрать и запустить контейнеры: 
+  ```
+  docker-compose build
+  docker-compose up
+  ```
+Документация доступна по адресам:
+* http://localhost/docs
+* http://localhost/redoc. 

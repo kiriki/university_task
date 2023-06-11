@@ -2,18 +2,18 @@ import uvicorn
 from fastapi import FastAPI
 
 from config import settings
-# from db.base import Base
-# from db.session import engine
-from apis.base import api_router
+
+from api.base import api_router
+from db.base import Base
+from db.session import engine
 
 
 def include_router(app: FastAPI) -> None:
     app.include_router(api_router)
 
 
-#
-# def create_tables() -> None:
-#     Base.metadata.create_all(bind=engine)
+def create_tables() -> None:
+    Base.metadata.create_all(bind=engine)
 
 
 def start_application() -> FastAPI:
@@ -23,7 +23,7 @@ def start_application() -> FastAPI:
     )
 
     include_router(_app)
-    # create_tables()
+    create_tables()
 
     return _app
 
@@ -31,6 +31,6 @@ def start_application() -> FastAPI:
 app = start_application()
 
 if __name__ == '__main__':
-    config = uvicorn.Config('main:app', port=8000, host='0.0.0.0', reload=True)
+    config = uvicorn.Config('main:app', port=8000, host='0.0.0.0')
     server = uvicorn.Server(config)
     server.run()
